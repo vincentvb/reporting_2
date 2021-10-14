@@ -17,7 +17,13 @@ for index, url in enumerate(urls):
 	soup = BeautifulSoup(article.html, 'html.parser')
 	article_body = soup.find("div", {"class":"article-body"})
 
-	remove_phrases = ['Subscribe today ArrowRight', 'AdvertisementStory continues below', 'advertisement']
+	remove_phrases = [
+		'Reader 1:',
+		'Reader 2:',
+		'Subscribe today ArrowRight',
+		'AdvertisementStory continues below',
+		'advertisement'
+	]
 	final_text = article_body.text
 
 	for phrase in remove_phrases:
