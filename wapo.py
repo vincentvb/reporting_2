@@ -3,7 +3,7 @@ import pandas as pd
 from newspaper import Article
 from bs4 import BeautifulSoup
 
-data = pd.read_csv('~/Downloads/wapo_work_advice.csv')
+data = pd.read_csv('./wapo_work_advice.csv')
 
 article_dates = data['Date'].to_numpy()
 urls = data['Link'].to_numpy()
