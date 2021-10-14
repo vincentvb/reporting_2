@@ -18,6 +18,7 @@ for index, url in enumerate(urls):
 	article_body = soup.find("div", {"class":"article-body"})
 
 	remove_phrases = [
+		'Reader:',
 		'Reader 1:',
 		'Reader 2:',
 		'Subscribe today ArrowRight',
