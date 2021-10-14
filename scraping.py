@@ -7,12 +7,10 @@ from bs4 import BeautifulSoup
 
 with open("nytimes.json", "r") as read_file:
 	data = json.load(read_file)
-	print(data[0])
-
 
 	article_data = []
 
-	for url in data[0:1]:
+	for url in data:
 		# Retrieve article content and download HTML
 		article = Article(url, keep_article_html=True)
 		article.download()
@@ -29,15 +27,12 @@ with open("nytimes.json", "r") as read_file:
 			else:
 				article_body += element.get_text()
 		
-        # Push article body/date to array for future processing
-
 		article_body = article_body.split("For help with your awkward situation", 1)[0]
-		# article_body = re.sub(r'([A-Z]{2,})', r'\1\n', article_body)
-		print(article_body)
+		article_body = re.sub(r'([A-Z]{2,}|ImageCredit..)', '', article_body)
+    # Push article body/date to array for future processing
 		article_data.append([date, article_body])
 
 
-    # Convert to DataFrame and generate csv file
+  # Convert to DataFrame and generate csv file
 	parsed_data = pd.DataFrame(article_data, columns=['date', 'body'])
-	print(parsed_data.head())
 	parsed_data.to_csv('nytimes_data.csv')
